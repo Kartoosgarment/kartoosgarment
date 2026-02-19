@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop - Kartoosgarment</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f5f5f5;
+    text-align: center;
+}
+
+.navbar {
+    background: maroon;
+    padding: 15px;
+    position: sticky;
+    top: 0;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+.products-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 30px;
+}
+
+.product-card {
+    background: white;
+    width: 260px;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.product-card img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.price {
+    font-size: 20px;
+    font-weight: bold;
+    color: maroon;
+    margin: 10px 0;
+}
+
+.buy-btn {
+    background: gold;
+    color: maroon;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+}
+
+.modal-content {
+    background: white;
+    width: 320px;
+    margin: 8% auto;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.proceed-btn {
+    background: maroon;
+    color: white;
+    padding: 12px;
+    border: none;
+    width: 100%;
+    border-radius: 6px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.modal-btn {
+    display: block;
+    padding: 14px;
+    margin: 10px 0;
+    text-decoration: none;
+    color: white;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.pay-full { background: #28a745; }
+.pay-49 { background: #007bff; }
+.wa-chat { background: #25D366; }
+
+.close-btn {
+    background: #eee;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 6px;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="https://wa.me/919867932652">Contact</a>
+</div>
+
+<div class="products-container">
+
+<div class="product-card">
+    <img src="designerkurta.jpeg" alt="Designer Kurta">
+    <h3>Designer Yellow Kurta</h3>
+    <p class="price">₹1999</p>
+    <button class="buy-btn" onclick="openAddressModal('Designer Yellow Kurta',1999,'designerkurta.jpeg')">Buy Now</button>
+</div>
+
+<div class="product-card">
+    <img src="greyjodhpuri.jpeg" alt="Grey Jodhpuri">
+    <h3>Grey Jodhpuri Suit</h3>
+    <p class="price">₹3999</p>
+    <button class="buy-btn" onclick="openAddressModal('Grey Jodhpuri Suit',3999,'greyjodhpuri.jpeg')">Buy Now</button>
+</div>
+
+<div class="product-card">
+    <img src="jodhpurskyblue.jpeg" alt="Sky Blue Jodhpuri">
+    <h3>Sky Blue Jodhpuri</h3>
+    <p class="price">₹3499</p>
+    <button class="buy-btn" onclick="openAddressModal('Sky Blue Jodhpuri',3499,'jodhpurskyblue.jpeg')">Buy Now</button>
+</div>
+
+<div class="product-card">
+    <img src="semiindowestanblue.jpeg" alt="Semi Indo Western">
+    <h3>Semi Indo Western Blue</h3>
+    <p class="price">₹2499</p>
+    <button class="buy-btn" onclick="openAddressModal('Semi Indo Western Blue',2499,'semiindowestanblue.jpeg')">Buy Now</button>
+</div>
+
+<div class="product-card">
+    <img src="whitekurtaset.jpeg" alt="white kurtaset">
+    <h3>white kurtaset</h3>
+    <p class="price">₹2499</p>
+    <button class="buy-btn" onclick="openAddressModal('whitekutaset',2499,'whitekurtaset.jpeg')">Buy Now</button>
+</div>
+
+<div class="product-card">
+    <img src="slblezar.jpeg.jpeg" alt="Sky Blue Blazer">
+    <h3>Sky Blue Premium Blazer</h3>
+    <p class="price">₹4499</p>
+    <button class="buy-btn" onclick="openAddressModal('Sky Blue Premium Blazer',4499,'slblezar.jpeg.jpeg')">Buy Now</button>
+</div>
+
+</div>
+
+<!-- Address Modal -->
+<div id="addressModal" class="modal">
+<div class="modal-content">
+    <h3>Delivery Details</h3>
+    <div id="selectedItem" style="color:maroon;font-weight:bold;margin-bottom:10px;"></div>
+    <input type="text" id="custName" placeholder="Full Name">
+    <input type="tel" id="custPhone" placeholder="Mobile Number">
+    <textarea id="custAddr" placeholder="Full Address"></textarea>
+    <button class="proceed-btn" onclick="showPaymentOptions()">Proceed</button>
+    <button class="close-btn" onclick="closeAllModals()">Cancel</button>
+</div>
+</div>
+
+<!-- Payment Modal -->
+<div id="paymentModal" class="modal">
+<div class="modal-content">
+    <h3>Payment Options</h3>
+    <a id="fullPayLink" href="#" class="modal-btn pay-full">Pay Full Amount</a>
+    <a id="codPayLink" href="#" class="modal-btn pay-49">Pay ₹49 for COD</a>
+    <a id="waChatLink" href="#" class="modal-btn wa-chat">Chat on WhatsApp</a>
+    <button class="close-btn" onclick="closeAllModals()">Back</button>
+</div>
+</div>
+
+<script>
+let currentItem = { name:"", price:0, img:"" };
+
+function openAddressModal(name,price,img){
+    currentItem = {name,price,img};
+    document.getElementById("selectedItem").innerText = name+" (₹"+price+")";
+    document.getElementById("addressModal").style.display="block";
+}
+
+function showPaymentOptions(){
+    const name = document.getElementById("custName").value;
+    const phone = document.getElementById("custPhone").value;
+    const addr = document.getElementById("custAddr").value;
+
+    if(!name || !phone || !addr){
+        alert("Please fill all details");
+        return;
+    }
+
+    const myUPI="Kartoosgarment@okicici";
+    const myPhone="919867932652";
+    const photoLink=`https://kartoosgarment.github.io/kartoosgarment/${currentItem.img}`;
+
+    document.getElementById("fullPayLink").href=
+    `upi://pay?pa=${myUPI}&pn=Kartoos&am=${currentItem.price}&cu=INR&tn=${currentItem.name}`;
+
+    document.getElementById("codPayLink").href=
+    `upi://pay?pa=${myUPI}&pn=Kartoos&am=49&cu=INR&tn=Booking_${currentItem.name}`;
+
+    document.getElementById("waChatLink").href=
+    `https://wa.me/${myPhone}?text=Order: ${currentItem.name}%0AName: ${name}%0APhone: ${phone}%0AAddress: ${addr}%0APhoto: ${photoLink}`;
+
+    document.getElementById("addressModal").style.display="none";
+    document.getElementById("paymentModal").style.display="block";
+}
+
+function closeAllModals(){
+    document.getElementById("addressModal").style.display="none";
+    document.getElementById("paymentModal").style.display="none";
+}
+</script>
+
+</body>
+</html>
