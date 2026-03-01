@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kartoosgarment Shop</title>
+
+<style>
+body{font-family:Arial;margin:0;background:#f5f5f5;text-align:center}
+.navbar{background:maroon;padding:15px;position:sticky;top:0}
+.navbar a{color:white;text-decoration:none;margin:0 15px;font-weight:bold}
+.products{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;padding:30px}
+.card{background:white;width:240px;padding:15px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.1)}
+.card img{width:100%;height:320px;object-fit:cover;border-radius:8px}
+.price{font-size:20px;font-weight:bold;color:maroon;margin:10px 0}
+.btn{background:gold;color:maroon;border:none;padding:12px;width:100%;border-radius:6px;font-weight:bold;cursor:pointer}
+
+/* Slider */
+.slider{position:relative;width:100%;height:320px;overflow:hidden;border-radius:8px;margin-bottom:10px}
+.slide-img{width:100%;height:320px;object-fit:cover}
+.prev,.next{
+position:absolute;top:50%;transform:translateY(-50%);
+background:rgba(0,0,0,0.5);color:white;border:none;
+padding:8px 12px;cursor:pointer;border-radius:50%;
+}
+.prev{left:10px}
+.next{right:10px}
+
+/* Modal */
+.modal{
+display:none;position:fixed;inset:0;
+background:rgba(0,0,0,0.75);
+backdrop-filter:blur(6px);
+align-items:center;justify-content:center;
+z-index:1000;
+}
+.modal-content{
+width:380px;padding:25px;border-radius:18px;
+background:rgba(255,255,255,0.95);
+text-align:center;color:black;
+animation:popup 0.3s ease;
+display:flex;flex-direction:column;align-items:center;
+}
+@keyframes popup{from{transform:scale(0.8);opacity:0}to{transform:scale(1);opacity:1}}
+input,textarea,select{width:100%;padding:10px;margin:6px 0;border-radius:6px;border:1px solid #ccc}
+.action-btn{background:maroon;color:white;padding:12px;border:none;width:100%;border-radius:6px;cursor:pointer;margin-top:8px}
+.close{background:#eee;border:none;padding:10px;width:100%;border-radius:6px;cursor:pointer;margin-top:5px}
+textarea#customerReceipt{height:150px;resize:none;font-size:14px;margin-top:10px}
+
+@media screen and (max-width:800px){.card{width:45%;}}
+@media screen and (max-width:500px){.card{width:100%;}}
+</style>
+</head>
+<body>
+
+<div class="navbar">
+<a href="#">Home</a>
+<a href="#">Shop</a>
+<a href="#" onclick="openContact()">Contact</a>
+</div>
+
+<div class="products">
+
+<!-- Product 1 -->
+  <div class="card">
+    <div class="slider">
+     <img src="desingner grey jodhpuri1.jpg" class="slide-img">
+     <img src="desingner grey jodhpuri2.jpg" class="slide-img" style="display:none;">
+     <img src="desingner grey jodhpuri3.jpg" class="slide-img" style="display:none;"> 
+     <button class="prev" onclick="prevSlide(this)">❮</button>
+     <button class="next" onclick="nextSlide(this)">❯</button>
+    </div>
+    <h3>Desingner Grey Jodhpuri</h3>
+    <p class="price">₹3695</p>
+    <button class="btn" onclick="openAddress('Desingner Grey Jodhpuri',3695)">Buy Now</button>
+    <br><br>
+
+<button onclick="showDetails(this)" style="padding:8px 15px; background:maroon; color:white; border:none; cursor:pointer;">
+Product Details
+</button>
+
+<p class="details" style="display:none; margin-top:10px; font-size:14px; color:black;">
+Material: Premium Imported Popcorn Fabric <br>
+Type: cristale work designer jodhpuri<br>
+Comfortable & Stylish<br>
+Available Sizes:36,38,40,42,44
+included 1 black formal pant
+</p>
+  </div>
+   
+  <!-- Product 2 -->
+  <div class="card">
+    <div class="slider">
+      <img src="desingner sleevedless suit.jpg" class="slide-img">
+      <button class="prev" onclick="prevSlide(this)">❮</button>
+      <button class="next" onclick="nextSlide(this)">❯</button>
+    </div>
+    <h3>Desingner Sleevedless Suit</h3>
+    <p class="price">₹3395</p>
+    <button class="btn" onclick="openAddress('Desingner Sleevedless Suit',3395)">Buy Now</button>
+    <br><br>
+
+<button onclick="showDetails(this)" style="padding:8px 15px; background:maroon; color:white; border:none; cursor:pointer;">
+Product Details
+</button>
+
+<p class="details" style="display:none; margin-top:10px; font-size:14px; color:black;">
+Type: sleeveless sb blazer <br>
+Comfortable & Stylish<br>
+Available Sizes:38,40,42
+included 1 black formal pant
+</p>
+
+  </div>
+
+  <!-- Product 3 -->
+  <div class="card">
+    <div class="slider">
+      <img src="desingner z black jodhpuri1.jpg" class="slide-img">
+      <img src="desingner z black jodhpuri2.jpg" class="slide-img" style="display:none;">
+      <img src="desingner z black jodhpuri3.jpg" class="slide-img" style="display:none;">
+      <button class="prev" onclick="prevSlide(this)">❮</button>
+      <button class="next" onclick="nextSlide(this)">❯</button>
+
+    </div>
+    <h3>Black Premium Princesuit</h3>
+    <p class="price">₹5495</p>
+    <button class="btn" onclick="openAddress('Black Premium Princesuit',5495)">Buy Now</button>
+<br><br>
+
+<button onclick="showDetails(this)" style="padding:8px 15px; background:maroon; color:white; border:none; cursor:pointer;">
+Product Details
+</button>
+
+<p class="details" style="display:none; margin-top:10px; font-size:14px; color:black;">
+Type: premium thread handwork designer jodhpuri <br>
+Comfortable & Stylish<br>
+Available Sizes:38,40
+included 1 black formal pant
+
+  </div>
+
+  <!-- Product 4 -->
+  <div class="card">
+    <div class="slider">
+      <img src="n blue jodhpuri.jpg" class="slide-img">
+      <button class="prev" onclick="prevSlide(this)">❮</button>
+      <button class="next" onclick="nextSlide(this)">❯</button>
+    </div>
+    <h3>Navy Blue Jodhpuri</h3>
+    <p class="price">₹3495</p>
+    <button class="btn" onclick="openAddress('Navy Blue Jodhpuri',3495)">Buy Now</button>
+<br><br>
+
+<button onclick="showDetails(this)" style="padding:8px 15px; background:maroon; color:white; border:none; cursor:pointer;">
+Product Details
+</button>
+
+<p class="details" style="display:none; margin-top:10px; font-size:14px; color:black;">
+Material: imported Fabric<br>
+Type: designer jodhpuri <br>
+Comfortable & Stylish<br>
+Available Sizes:38,40
+included 1 white formal pant
+
+  </div>
+
+  <!-- Product 5 -->
+  <div class="card">
+    <div class="slider">
+      <img src="imperial open jp1.jpg" class="slide-img">
+      <img src="imperial open jp2.jpg" class="slide-img" style="display:none;">
+      <img src="imperial open jp3.jpg" class="slide-img" style="display:none;">
+      <button class="prev" onclick="prevSlide(this)">❮</button>
+      <button class="next" onclick="nextSlide(this)">❯</button>
+    </div>
+    <h3>Imperial Open Jodhpuri</h3>
+    <p class="price">₹2495</p>
+    <button class="btn" onclick="openAddress('Imperial Open Jodhpuri',2495)">Buy Now</button>
+<br><br>
+
+<button onclick="showDetails(this)" style="padding:8px 15px; background:maroon; color:white; border:none; cursor:pointer;">
+Product Details
+</button>
+
+<p class="details" style="display:none; margin-top:10px; font-size:14px; color:black;">
+Material:self work imported Fabric<br>
+Type: imprial jodhpuri <br>
+Comfortable & Stylish<br>
+Available Sizes:36,38,40,42
+included 1 white formal pant
+
+  </div>
+  
+  <!-- Product 6 -->
+  <div class="card">
+    <div class="slider">
+      <img src="ocean blue indo westan.jpg" class="slide-img">
+      <button class="prev" onclick="prevSlide(this)">❮</button>
+      <button class="next" onclick="nextSlide(this)">❯</button>
+    </div>
+    <h3>Ocean Blue Semi Indo Western</h3>
+    <p class="price">₹3995</p>
+    <button class="btn" onclick="openAddress('Ocean Blue Semi Indo Western',3995)">Buy Now</button>
+<br><br>
+
+<button onclick="showDetails(this)" style="padding:8px 15px; background:maroon; color:white; border:none; cursor:pointer;">
+Product Details
+</button>
+
+<p class="details" style="display:none; margin-top:10px; font-size:14px; color:black;">
+Material:zikzak cottonmix Fabric<br>
+Type: Shaded indoweStan<br>
+Comfortable & Stylish<br>
+Available Sizes:38,40,42
+included 1 white Slimfit Semitrouser 
+
+  </div>
+
+  <!-- Product 7 -->
+  <div class="card">
+    <div class="slider">
+      <img src="offwhite kurta set1.jpg" class="slide-img">
+      <img src="offwhite kurta set2.jpg" class="slide-img" style="display:none;">
+      <img src="offwhite kurta set3.jpg" class="slide-img" style="display:none;">
+      <button class="prev" onclick="prevSlide(this)">❮</button>
+      <button class="next" onclick="nextSlide(this)">❯</button>
+    </div>
+    <h3>Offwhite Kurta Set</h3>
+    <p class="price">₹1995</p>
+    <button class="btn" onclick="openAddress('Offwhite Kurta Set',1995)">Buy Now</button>
+<br><br>
+
+<button onclick="showDetails(this)" style="padding:8px 15px; background:maroon; color:white; border:none; cursor:pointer;">
+Product Details
+</button>
+
+<p class="details" style="display:none; margin-top:10px; font-size:14px; color:black;">
+Material:ps duepan Fabric krta with matching white Slimfit Semitrouser <br>
+Comfortable & Stylish<br>
+Available Sizes:38,40,42
+included premium embroidery jacket
+
+  </div>
+
+  <!-- Product 8 (Pista Green) -->
+  <div class="card">
+    <div class="slider">
+     <img src="pista greaan indowestan1.jpg" class="slide-img">
+      <img src="pista greaan indowestan2.jpg" class="slide-img" style="display:none;">
+      <img src="pista greaan indowestan3.jpg" class="slide-img" style="display:none;">
+      <button class="prev" onclick="prevSlide(this)">❮</button>
+      <button class="next" onclick="nextSlide(this)">❯</button>
+    </div>
+    <h3>Pista Green Semi Indo Western</h3>
+    <p class="price">₹1995</p>
+    <button class="btn" onclick="openAddress('Pista Green Semi Indo Western',1995)">Buy Now</button>
+<br><br>
+
+<button onclick="showDetails(this)" style="padding:8px 15px; background:maroon; color:white; border:none; cursor:pointer;">
+Product Details
+</button>
+
+<p class="details" style="display:none; margin-top:10px; font-size:14px; color:black;">
+Material:zikzak cottonmix Fabric<br>
+Type: pista green semiindowestan<br>
+Comfortable & Stylish<br>
+Available Sizes:38,40,42
+included 1 white Slimfit Semitrouser 
+
+  </div>
+
+  <!-- Product 9 -->
+  <div class="card">
+    <div class="slider">
+     <img src="primium caisual jacket set.jpg" class="slide-img">
+      <button class="prev" onclick="prevSlide(this)">❮</button>
+      <button class="next" onclick="nextSlide(this)">❯</button>
+    </div>
+    <h3>Premium Casual Jacket Set</h3>
+    <p class="price">₹2395</p>
+    <button class="btn" onclick="openAddress('Premium Casual Jacket Set',2395)">Buy Now</button>
+<br><br>
+
+<button onclick="showDetails(this)" style="padding:8px 15px; background:maroon; color:white; border:none; cursor:pointer;">
+Product Details
+</button>
+
+<p class="details" style="display:none; margin-top:10px; font-size:14px; color:black;">
+Material:pure cottan shirt or ps duepan Fabric krta with matching white Slimfit Semitrouser <br>
+Comfortable & Stylish<br>
+Available Sizes:38,40,42
+included check jacket
+
+  </div>
+
+  <!-- Product 10 -->
+  <div class="card">
+    <div class="slider">
+     <img src="royal blue semi indowestan1.jpg" class="slide-img">
+      <img src="royal blue semi indowestan2.jpg" class="slide-img" style="display:none;">
+      <img src="royal blue semi indowestan3.jpg" class="slide-img" style="display:none;">
+      <button class="prev" onclick="prevSlide(this)">❮</button>
+      <button class="next" onclick="nextSlide(this)">❯</button>
+    </div>
+    <h3>Royal Blue Semi Indo Western</h3>
+    <p class="price">₹1995</p>
+    <button class="btn" onclick="openAddress('Royal Blue Semi Indo Western',1995)">Buy Now</button>
+<br><br>
+
+<button onclick="showDetails(this)" style="padding:8px 15px; background:maroon; color:white; border:none; cursor:pointer;">
+Product Details
+</button>
+
+<p class="details" style="display:none; margin-top:10px; font-size:14px; color:black;">
+Material: cottonmix Fabric<br>
+Type: semiindowestan<br>
+Comfortable & Stylish<br>
+Available Sizes:38,40,42
+included 1 white Slimfit Semitrouser 
+
+  </div>
+
+  <!-- Product 11 -->
+  <div class="card">
+    <div class="slider">
+     <img src="special kurta set.jpg" class="slide-img">
+      <button class="prev" onclick="prevSlide(this)">❮</button>
+      <button class="next" onclick="nextSlide(this)">❯</button>
+    </div>
+    <h3>Special Kurta Set</h3>
+    <p class="price">₹1995</p>
+    <button class="btn" onclick="openAddress('Special Kurta Set',1995)">Buy Now</button>
+<br><br>
+
+<button onclick="showDetails(this)" style="padding:8px 15px; background:maroon; color:white; border:none; cursor:pointer;">
+Product Details
+</button>
+
+<p class="details" style="display:none; margin-top:10px; font-size:14px; color:black;">
+Material: duepan Fabric kurta with matching semitrauser <br>
+Type: semiindowestan<br>
+Comfortable & Stylish<br>
+Available Sizes:38,40,42
+included 1 skyblue jacket 
+
+  </div>
+
+  <!-- Product 12 -->
+  <div class="card">
+    <div class="slider">
+     <img src="white kurta set1.jpg" class="slide-img">
+      <img src="white kurta set2.jpg" class="slide-img" style="display:none;">
+      <img src="white kurta set3.jpg" class="slide-img" style="display:none;">
+      <button class="prev" onclick="prevSlide(this)">❮</button>
+      <button class="next" onclick="nextSlide(this)">❯</button>
+    </div>
+    <h3>White Kurta Set</h3>
+    <p class="price">₹1995</p>
+    <button class="btn" onclick="openAddress('White Kurta Set',1995)">Buy Now</button>
+<br><br>
+
+<button onclick="showDetails(this)" style="padding:8px 15px; background:maroon; color:white; border:none; cursor:pointer;">
+Product Details
+</button>
+
+<p class="details" style="display:none; margin-top:10px; font-size:14px; color:black;">
+Type:kurtaset<br>
+Comfortable & Stylish<br>
+Available Sizes:38,40,42
+included 1 maroon embroidery jacket
+
+  </div>
+</div>
+
+<!-- Modals -->
+<div id="addressModal" class="modal">
+<div class="modal-content">
+<h3 id="itemName"></h3>
+<input type="text" id="name" placeholder="Your Name">
+<input type="text" id="phone" placeholder="Phone Number">
+<textarea id="addr" placeholder="Address"></textarea>
+<select id="sizeSelect">
+<option value="">Select Size</option>
+<option>34</option>
+<option>36</option>
+<option>38</option>
+<option>40</option>
+<option>42</option>
+<option>44</option>
+<option>Custom Stitch</option>
+</select>
+<button class="action-btn" onclick="checkCustom()">Proceed</button>
+<button class="close" onclick="closeAll()">Close</button>
+</div>
+</div>
+
+<div id="measureModal" class="modal">
+<div class="modal-content">
+<h3>Custom Measurements</h3>
+<input id="neck" placeholder="Neck">
+<input id="chest" placeholder="Chest">
+<input id="stomach" placeholder="Stomach">
+<input id="hip" placeholder="Hip">
+<input id="shoulder" placeholder="Shoulder">
+<input id="sleeveLength" placeholder="Sleeve Length">
+<input id="arms" placeholder="Arms">
+<input id="topLength" placeholder="Top Length">
+<button class="action-btn" onclick="proceed()">Submit</button>
+<button class="close" onclick="closeAll()">Close</button>
+</div>
+</div>
+
+<div id="receiptModal" class="modal">
+<div class="modal-content">
+<h3>Order Receipt</h3>
+<textarea id="customerReceipt" readonly></textarea>
+<button class="action-btn" onclick="copyReceipt()">Copy Receipt</button>
+<button class="close" onclick="closeAll()">Close</button>
+</div>
+</div>
+
+<div id="contactModal" class="modal">
+<div class="modal-content">
+<h3>Contact Us</h3>
+<p>Phone: 9867932652</p>
+<p>Email: kartoosgarment@gmail.com</p>
+<button class="close" onclick="closeAll()">Close</button>
+</div>
+</div>
+
+<script>
+
+// ===== SLIDER =====
+function nextSlide(btn){
+let imgs=btn.parentElement.querySelectorAll('.slide-img');
+for(let i=0;i<imgs.length;i++){
+if(imgs[i].style.display!=="none"){
+imgs[i].style.display="none";
+imgs[(i+1)%imgs.length].style.display="block";
+break;}}}
+
+function prevSlide(btn){
+let imgs=btn.parentElement.querySelectorAll('.slide-img');
+for(let i=0;i<imgs.length;i++){
+if(imgs[i].style.display!=="none"){
+imgs[i].style.display="none";
+imgs[(i-1+imgs.length)%imgs.length].style.display="block";
+break;}}}
+
+// ===== ORDER SYSTEM =====
+let currentItem={name:"",price:0};
+let customMeasurements="";
+
+function openAddress(name,price){
+currentItem={name,price};
+document.getElementById("itemName").innerText=name+" (₹"+price+")";
+document.getElementById("addressModal").style.display="flex";
+customMeasurements="";
+}
+
+function checkCustom(){
+let name=document.getElementById("name").value.trim();
+let phone=document.getElementById("phone").value.trim();
+let addr=document.getElementById("addr").value.trim();
+let size=document.getElementById("sizeSelect").value;
+
+if(!name||!phone||!addr||!size){alert("Please fill all details");return;}
+
+if(size==="Custom Stitch"){
+document.getElementById("addressModal").style.display="none";
+document.getElementById("measureModal").style.display="flex";
+}else{proceed();}
+}
+
+function generateOrderNumber(){
+return 'ORD-'+Math.floor(1000 + Math.random()*9000);
+}
+
+function proceed(){
+let name=document.getElementById("name").value.trim();
+let phone=document.getElementById("phone").value.trim();
+let addr=document.getElementById("addr").value.trim();
+let size=document.getElementById("sizeSelect").value;
+
+if(size==="Custom Stitch"){
+customMeasurements=`📏 Measurements:
+Neck: ${neck.value}
+Chest: ${chest.value}
+Stomach: ${stomach.value}
+Hip: ${hip.value}
+Shoulder: ${shoulder.value}
+Sleeve: ${sleeveLength.value}
+Arms: ${arms.value}
+Top Length: ${topLength.value}`;
+}
+
+let orderNum=generateOrderNumber();
+
+let orderText=`🛒 *New Order for - Kartoosgarment*
+Order No: ${orderNum}
+Product: ${currentItem.name}
+Price: ₹${currentItem.price}
+Size: ${size}
+${customMeasurements}
+Customer Name: ${name}
+Phone: ${phone}
+Address: ${addr}`;
+
+window.open(`https://wa.me/919867932652?text=${encodeURIComponent(orderText)}`,"_blank");
+
+let receiptText=`🛒 Your Order Receipt
+
+Order No: ${orderNum}
+Product: ${currentItem.name}
+Price: ₹${currentItem.price}
+Size: ${size}
+
+${customMeasurements}
+
+Customer Name: ${name}
+Phone: ${phone}
+Address: ${addr}
+
+Thank you for shopping with Kartoosgarment ❤️`;
+
+document.getElementById("customerReceipt").value=receiptText;
+
+closeAll();
+document.getElementById("receiptModal").style.display="flex";
+}
+
+function copyReceipt(){
+let text=document.getElementById("customerReceipt");
+text.select();
+document.execCommand("copy");
+alert("Receipt copied successfully!");
+}
+
+function closeAll(){
+document.getElementById("addressModal").style.display="none";
+document.getElementById("measureModal").style.display="none";
+document.getElementById("receiptModal").style.display="none";
+document.getElementById("contactModal").style.display="none";
+}
+
+function openContact(){
+document.getElementById("contactModal").style.display="flex";
+}
+ 
+
+function showDetails(btn) {
+  let details = btn.parentElement.querySelector(".details");
+  if (details.style.display === "none") {
+    details.style.display = "block";
+  } else {
+    details.style.display = "none";
+  }
+}
+
+</script>
+</body>
+</html>
